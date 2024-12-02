@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaUserCircle } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { PiBellLight } from "react-icons/pi";
 import { TfiWrite } from "react-icons/tfi";
+import { Avatar } from "./Avatar";
 
 const Appbar = () => {
   const [searchActive, setSearchActive] = useState<boolean>(false);
+
+  const currentUser = {
+    firstName: "Ganesh",
+    lastName: "Chaudhari",
+  };
+
   return (
-    <div className="bg-white flex items-center justify-between p-2 ">
+    <div className="bg-white flex items-center justify-between p-2 mb-10">
       {/* Left Side */}
       <div className="flex items-center gap-6">
         <div className="text-3xl">Medium</div>
@@ -43,7 +50,8 @@ const Appbar = () => {
           <PiBellLight size={28} />
         </div>
         <div>
-          <FaUserCircle size={28} />
+          {currentUser && <Avatar author="Ganesh" size={8}></Avatar>}
+          {!currentUser && <FaUserCircle size={28} />}
         </div>
       </div>
     </div>

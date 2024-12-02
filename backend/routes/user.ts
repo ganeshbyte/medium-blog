@@ -1,8 +1,8 @@
+import { signinInput, signupInput } from "@ganesh2111/common-app";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { sign } from "hono/jwt";
-import { SignupType, signinInput, signupInput } from "@ganesh2111/common-app";
 
 export const userRouter = new Hono<{
   Bindings: {
@@ -37,14 +37,17 @@ userRouter.post("/signup", async (c) => {
   });
 
   const token = await sign(
-    { id: user.id, exp: Math.floor(Date.now() / 1000) + 60 * 5 },
+    { id: user.id, exp: Math.floor(Date.now() / 1000) + 60 * 50 },
     c.env.JWT_SECRET,
     "HS256"
   );
 
-  return c.json({
-    jwt: token,
-  });
+  return c.json(
+    {
+      jwt: token,
+    },
+    201
+  );
 });
 
 userRouter.post("/signin", async (c) => {
@@ -78,8 +81,25 @@ userRouter.post("/signin", async (c) => {
   }
 
   const jwt = await sign(
-    { id: user.id, exp: Math.floor(Date.now() / 1000) + 60 * 5 },
+    { id: user.id, exp: Math.floor(Date.now() / 1000) + 60 * 50 },
     c.env.JWT_SECRET
   );
-  return c.json({ jwt });
+  return c.json({ jwt }, 200);
+});
+
+userRouter.get("/:id", async (c) => {
+  const id = c.req.param("id");
+
+  const prisma = new PrismaClient({
+    //@ts-ignore
+    datasourceUrl: c.env?.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  return c.json(user);
 });

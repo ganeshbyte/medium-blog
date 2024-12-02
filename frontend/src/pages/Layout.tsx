@@ -5,7 +5,7 @@ export const Layout = () => {
   return (
     <div className="font-primary">
       <Appbar></Appbar>
-      <div>
+      <div className=" ml-20 mr-20">
         <Outlet></Outlet>
       </div>
     </div>
