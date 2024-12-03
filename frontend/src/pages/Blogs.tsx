@@ -1,33 +1,18 @@
+import { Skeleton } from "../components/Skeleton";
 import { useBlogs } from "../hooks";
+import { IBlog } from "../types";
 import { Blog } from "./Blog";
-
-interface Blog {
-  id: string;
-  title: string;
-  content: string;
-  author: {
-    name: string;
-  };
-}
 
 export const Blogs = () => {
   const { loading, blogs } = useBlogs();
 
   if (loading) {
-    return <div>loading...</div>;
+    return <Skeleton></Skeleton>;
   }
   return (
-    <div className="grid-cols-1 justify-center">
+    <div className="mx-auto">
       {blogs?.length &&
-        blogs.map((blog: Blog) => (
-          <Blog
-            authorName={blog.author?.name}
-            content={blog.content}
-            publishedDate="23 May 2024"
-            title={blog.title}
-            key={blog.id}
-          ></Blog>
-        ))}
+        blogs.map((blog: IBlog) => <Blog blog={blog} key={blog.id}></Blog>)}
     </div>
   );
 };

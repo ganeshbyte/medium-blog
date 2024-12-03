@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Blog } from "./pages/Blog";
 import { Blogs } from "./pages/Blogs";
+import { FullBlog } from "./pages/FullBlog";
 import { Home } from "./pages/Home";
 import { Layout } from "./pages/Layout";
 import { NotFound } from "./pages/NotFound";
@@ -14,10 +14,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="blogs" element={<Blogs />}>
-              <Route path=":blogId" element={<Blog />} />
-            </Route>
-            <Route path="blogs" element={<Blogs />} />
+            <Route path="blogs" element={<Blogs />}></Route>
+            <Route path="blogs/:id" element={<FullBlog />} />
+
             <Route path="signin" element={<Signin />} />
             <Route path="signup" element={<Signup />} />
             <Route path="*" element={<NotFound />} />

@@ -5,7 +5,7 @@ import { getAuthToken } from "../utility";
 import { getBaseUrl } from "../utils/function";
 
 export function useBlogs() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState<IBlog[]>([]);
 
   useEffect(() => {
@@ -24,5 +24,29 @@ export function useBlogs() {
   return {
     loading,
     blogs,
+  };
+}
+
+export function useBlog({ id }: { id: string }) {
+  const [loading, setLoading] = useState(true);
+
+  const [blog, setBlog] = useState<IBlog>();
+
+  useEffect(() => {
+    axios
+      .get(`${getBaseUrl()}/blog/${id}`, {
+        headers: {
+          Authorization: `${getAuthToken()}`,
+        },
+      })
+      .then((response) => {
+        setBlog(response.data);
+        setLoading(false);
+      });
+  }, []);
+
+  return {
+    loading,
+    blog,
   };
 }
