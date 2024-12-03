@@ -41,7 +41,13 @@ const Appbar = () => {
         </div>
       </div>
       {/* Right Side */}
-      <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
+      <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6">
+        <button
+          type="button"
+          className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+        >
+          Publish
+        </button>
         <div className="flex items-center gap-2">
           <TfiWrite size={28} />
           <span>Write</span>
@@ -50,7 +56,7 @@ const Appbar = () => {
           <PiBellLight size={28} />
         </div>
         <div>
-          {currentUser && <Avatar author="Ganesh" size={8}></Avatar>}
+          {currentUser && <Avatar author="Ganesh" size={"big"}></Avatar>}
           {!currentUser && <FaUserCircle size={28} />}
         </div>
       </div>

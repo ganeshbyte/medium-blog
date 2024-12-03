@@ -1,19 +1,30 @@
 import { getAvatarIconName } from "../utility";
 
-export const Avatar = ({
-  author,
-  size = 12,
-}: {
+interface AvatartProps {
   author: string;
-  size: number;
-}) => {
-  return (
-    <div
-      className={`items-center justify-center w-${size} h-${size} bg-gray-400 px-2 rounded-full`}
-    >
-      <span className="text-xs font-medium text-gray-600 dark:text-gray-300 leading-none">
-        {author ? getAvatarIconName(author) : getAvatarIconName("Anonymous")}
-      </span>
-    </div>
-  );
+  size: "small" | "big";
+}
+
+export const Avatar = ({ author, size }: AvatartProps) => {
+  if (size === "big")
+    return (
+      <div
+        className={`items-center justify-center w-${size} h-${size} bg-gray-400 px-4 py-2 rounded-full`}
+      >
+        <span className="text-xs font-medium text-gray-600 dark:text-gray-300 leading-none">
+          {author ? getAvatarIconName(author) : getAvatarIconName("Anonymous")}
+        </span>
+      </div>
+    );
+  else {
+    return (
+      <div
+        className={`items-center justify-center w-${size} h-${size} bg-gray-400 px-3 py-1 rounded-full`}
+      >
+        <span className="text-xs font-medium text-gray-600 dark:text-gray-300 leading-none">
+          {author ? getAvatarIconName(author) : getAvatarIconName("Anonymous")}
+        </span>
+      </div>
+    );
+  }
 };

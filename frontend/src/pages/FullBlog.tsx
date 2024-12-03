@@ -21,16 +21,24 @@ export const FullBlog = () => {
           </div>
           <div className="text-gray-500 mb-5">{blog?.content}</div>
         </div>
-        <div className="w-1/3">
-          <div className="mb-2">Author</div>
-          <div className="flex gap-2">
-            <Avatar author={blog?.author?.name as string} size={6}></Avatar>
-            <span className="text-xl font-bold">
-              {blog?.author?.name || "Anonymous"}
-            </span>
-          </div>
-          <div>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere
+        <div className="w-1/4">
+          <div className="mb-6">Author</div>
+          <div className="flex  items-center justify-center gap-4">
+            <div className="flex-col">
+              <Avatar
+                author={blog?.author?.name as string}
+                size={"big"}
+              ></Avatar>
+            </div>
+
+            <div>
+              <span className="text-xl font-bold ">
+                {blog?.author?.name || "Anonymous"}
+              </span>
+              <div className="mt-1 text-sm">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere
+              </div>
+            </div>
           </div>
         </div>
       </div>
