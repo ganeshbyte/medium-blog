@@ -2,7 +2,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 interface ReactQuillEditorProps {
-  value: string;
+  value: string | undefined;
   theme: string;
   onChange: (value: string) => void;
 }

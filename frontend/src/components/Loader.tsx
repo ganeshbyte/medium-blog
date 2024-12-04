@@ -1,4 +1,4 @@
-export const Loader = ({ size = "8" }: { size: string }) => {
+export const Loader = ({ size = 8 }: { size: number }) => {
   return (
     <div role="status" className="inline-block">
       <svg

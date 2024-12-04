@@ -18,7 +18,7 @@ export const ButtonWithLoader = ({
       onClick={onClick}
     >
       <span className="text-sm mr-2">{label}</span>
-      {isLoading && <Loader size="4" />}
+      {isLoading && <Loader size={4} />}
     </button>
   );
 };
