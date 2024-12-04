@@ -45,7 +45,7 @@ const Appbar = () => {
       <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6">
         <button
           type="button"
-          className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+          className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center "
           onClick={() => {
             navigate("/publish");
           }}
