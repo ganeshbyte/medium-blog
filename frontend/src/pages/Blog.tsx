@@ -1,7 +1,7 @@
+import DOMPurify from "dompurify";
 import { Link } from "react-router-dom";
 import { Avatar } from "../components/Avatar";
 import type { IBlog } from "../types";
-
 interface BlogCardProps {
   blog: IBlog;
 }
@@ -18,9 +18,14 @@ export const Blog = ({ blog }: BlogCardProps) => {
       <Link to={`${blog.id}`}>
         <div className="font-bold text-2xl text-gray-900">{blog.title}</div>
       </Link>
-      <div className="text-gray-400 mb-3">
-        {blog.content?.length && blog.content.slice(0, 100) + "..."}
-      </div>
+
+      {/* Blog Content */}
+      <div
+        className="text-gray-500 mb-5"
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(blog.content.slice(0, 100) + "..."),
+        }}
+      ></div>
       <div className="text-gray-500">{`${
         blog.content?.length && Math.ceil(blog.content.length / 100)
       } minutes`}</div>

@@ -15,11 +15,11 @@ const Appbar = () => {
   };
 
   return (
-    <div className="bg-white flex items-center justify-between p-2 mb-10">
+    <div className="bg-gray-100 flex items-center justify-between p-2 mb-10">
       {/* Left Side */}
       <div className="flex items-center gap-6">
         <Link to={"/"}>
-          <div className="text-3xl">Medium</div>
+          <div className="text-3xl font-bold">Medium</div>
         </Link>
         <div className="relative">
           {!searchActive && (
@@ -52,6 +52,15 @@ const Appbar = () => {
           }}
         >
           Publish
+        </button>
+        <button
+          type="button"
+          className="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+          onClick={() => {
+            navigate("/blogs");
+          }}
+        >
+          Read
         </button>
         <div className="flex items-center gap-2">
           <TfiWrite size={28} />

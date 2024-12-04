@@ -12,7 +12,7 @@ import { getBaseUrl } from "../utils/function";
 export const Publish = () => {
   const [content, setContent] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -53,6 +53,8 @@ export const Publish = () => {
       title,
       content,
     };
+
+    setIsLoading(true);
 
     axios
       .post(
@@ -98,7 +100,7 @@ export const Publish = () => {
     <div>
       <div className="flex justify-center items-center">
         <ProgressBar width={`${progress}%`}></ProgressBar>
-        <div>{progress}%</div>
+        <div>{Math.floor(progress)}%</div>
       </div>
 
       <div className="mb-6">

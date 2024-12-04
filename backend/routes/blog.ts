@@ -81,11 +81,20 @@ blogRouter.get("/bulk", async (c) => {
 
   const limit: number = parseInt(c.req.query("limit") as string) || 10;
 
-  const skipBlog = page > 0 ? (page - 1) * limit : 0;
+  const startIndex = page > 0 ? (page - 1) * limit : 1;
+
+  const endIndex = page > 0 ? page * limit : 10;
+
+  const totalBlogs = await prisma.blog.count();
+
+  const pages = {
+    previous: {},
+    next: {},
+  };
 
   const blog = await prisma.blog.findMany({
     take: limit,
-    skip: skipBlog,
+    skip: startIndex,
     select: {
       id: true,
       title: true,
@@ -98,7 +107,26 @@ blogRouter.get("/bulk", async (c) => {
       },
     },
   });
-  return c.json(blog);
+
+  if (startIndex > 0) {
+    pages.previous = {
+      page: page - 1,
+      limit: limit,
+    };
+  }
+  if (endIndex < totalBlogs) {
+    pages.next = {
+      page: page + 1,
+      limit: limit,
+    };
+  }
+
+  return c.json({
+    data: [...blog],
+    prev: pages.previous,
+    next: pages.next,
+    total: totalBlogs,
+  });
 });
 
 blogRouter.get("/:id", async (c) => {
@@ -124,4 +152,19 @@ blogRouter.get("/:id", async (c) => {
   });
 
   return c.json(blog);
+});
+
+//Warning All Blog Will Be Deleted
+
+blogRouter.delete("/", async (c) => {
+  const id = c.req.param("id");
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env?.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const blog = await prisma.blog.deleteMany();
+
+  return c.json({
+    message: "All Blog Deleted",
+  });
 });
