@@ -4,6 +4,7 @@ import { FullBlog } from "./pages/FullBlog";
 import { Home } from "./pages/Home";
 import { Layout } from "./pages/Layout";
 import { NotFound } from "./pages/NotFound";
+import { Publish } from "./pages/Publish";
 import { Signin } from "./pages/Signin";
 import { Signup } from "./pages/Signup";
 
@@ -16,7 +17,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="blogs" element={<Blogs />}></Route>
             <Route path="blogs/:id" element={<FullBlog />} />
-
+            <Route path="publish" element={<Publish />}></Route>
             <Route path="signin" element={<Signin />} />
             <Route path="signup" element={<Signup />} />
             <Route path="*" element={<NotFound />} />

@@ -4,11 +4,12 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { PiBellLight } from "react-icons/pi";
 import { TfiWrite } from "react-icons/tfi";
+import { useNavigate } from "react-router-dom";
 import { Avatar } from "./Avatar";
 
 const Appbar = () => {
   const [searchActive, setSearchActive] = useState<boolean>(false);
-
+  const navigate = useNavigate();
   const currentUser = {
     firstName: "Ganesh",
     lastName: "Chaudhari",
@@ -45,6 +46,9 @@ const Appbar = () => {
         <button
           type="button"
           className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+          onClick={() => {
+            navigate("/publish");
+          }}
         >
           Publish
         </button>
