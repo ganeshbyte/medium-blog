@@ -1,6 +1,7 @@
 import type { CreatePostType } from "@ganesh2111/common-app";
 import axios from "axios";
 import { useEffect, useState, type ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ButtonWithLoader } from "../components/ButtonWithLoader";
 import { ProgressBar } from "../components/PogressBar";
@@ -17,6 +18,7 @@ export const Publish = () => {
   useEffect(() => {
     updateProgress();
   }, [title, content]);
+  const navigate = useNavigate();
 
   const onEditorValueChange = (value: string) => {
     setContent(value);
@@ -65,19 +67,30 @@ export const Publish = () => {
           },
         }
       )
-      .then((response) => {
+      .then((res) => {
+        if (!res) {
+          return;
+        }
         setProgress(100);
+        setIsLoading(false);
         Swal.fire({
           title: "Blog is published successfully",
           icon: "success",
         });
-        setTimeout(() => {
-          setTitle("");
-          setContent(undefined);
-          setProgress(0);
-        }, 2000);
 
-        setIsLoading(false);
+        navigate(`/blogs/${res?.data?.id}`);
+
+        // setTimeout(() => {
+        //   setTitle("");
+        //   setContent(undefined);
+        //   setProgress(0);
+        // }, 2000);
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Something Went Wrong",
+          icon: "error",
+        });
       });
   };
 

@@ -4,9 +4,8 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { PiBellLight } from "react-icons/pi";
 import { TfiWrite } from "react-icons/tfi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Avatar } from "./Avatar";
-
 const Appbar = () => {
   const [searchActive, setSearchActive] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -19,7 +18,9 @@ const Appbar = () => {
     <div className="bg-white flex items-center justify-between p-2 mb-10">
       {/* Left Side */}
       <div className="flex items-center gap-6">
-        <div className="text-3xl">Medium</div>
+        <Link to={"/"}>
+          <div className="text-3xl">Medium</div>
+        </Link>
         <div className="relative">
           {!searchActive && (
             <CiSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />

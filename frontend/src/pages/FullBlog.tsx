@@ -1,8 +1,8 @@
+import DOMPurify from "dompurify";
 import { useParams } from "react-router-dom";
 import { Avatar } from "../components/Avatar";
 import { Skeleton } from "../components/Skeleton";
 import { useBlog } from "../hooks";
-
 export const FullBlog = () => {
   const param = useParams();
   const { loading, blog } = useBlog({ id: param?.id as string });
@@ -19,7 +19,14 @@ export const FullBlog = () => {
           <div className="text-gray-500 mb-5">
             {blog?.publishedDate || "24 May 2024"}
           </div>
-          <div className="text-gray-500 mb-5">{blog?.content}</div>
+
+          {/* Blog Content */}
+          <div
+            className="text-gray-500 mb-5"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(blog?.content || ""),
+            }}
+          ></div>
         </div>
         <div className="w-1/4">
           <div className="mb-6">Author</div>
